@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>방명록</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { text-align: center; }
+    form { margin-bottom: 20px; }
+    #guestbook { margin-top: 20px; }
+    .entry { margin-bottom: 10px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+    .entry strong { display: block; font-size: 1.1em; }
+    .entry small { color: gray; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <h1>방명록</h1>
+  <form id="guestbookForm">
+    <input type="text" id="name" placeholder="이름" required>
+    <textarea id="message" placeholder="메시지를 작성해주세요" required></textarea>
+    <button type="submit">작성</button>
+  </form>
+  <div id="guestbook"></div>
+
+  <script>
+    // Google Apps Script에서 생성된 배포 URL
+    const apiUrl = 'https://script.google.com/macros/s/AKfycbzGFLLiU8GO84F4tcM2HohRkELdEDNtTuyq7kPH4YhsTgUZ3mS4x9VQBoPNfKv_cai7/exec'; // 실제 웹 앱 URL로 교체
+
+    // 방명록 데이터 불러오기
+    async function loadGuestbook() {
+      try {
+        const response = await fetch(apiUrl, { method: 'GET' });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        const guestbook = document.getElementById('guestbook');
+        guestbook.innerHTML = data.map(entry => `
+          <div class="entry">
+            <strong>${entry.name}</strong>
+            <div>${entry.message}</div>
+            <small>${new Date(entry.timestamp).toLocaleString()}</small>
+          </div>
+        `).join('');
+      } catch (error) {
+        console.error("Error loading guestbook:", error);
+      }
+    }
+
+    // 방명록 데이터 추가
+    document.getElementById('guestbookForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const message = document.getElementById('message').value;
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, message }),
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        document.getElementById('guestbookForm').reset();
+        loadGuestbook(); // 데이터 갱신
+      } catch (error) {
+        console.error("Error adding to guestbook:", error);
+      }
+    });
+
+    // 페이지 로드 시 데이터 불러오기
+    loadGuestbook();
+  </script>
+</body>
+</html>
