@@ -24,10 +24,8 @@
   <div id="guestbook"></div>
 
   <script>
-    // Google Apps Script에서 생성된 배포 URL
-    const apiUrl = 'https://script.google.com/macros/s/AKfycbzGFLLiU8GO84F4tcM2HohRkELdEDNtTuyq7kPH4YhsTgUZ3mS4x9VQBoPNfKv_cai7/exec'; // 실제 웹 앱 URL로 교체
+    const apiUrl = '/.netlify/functions/proxy';
 
-    // 방명록 데이터 불러오기
     async function loadGuestbook() {
       try {
         const response = await fetch(apiUrl, { method: 'GET' });
@@ -49,7 +47,6 @@
       }
     }
 
-    // 방명록 데이터 추가
     document.getElementById('guestbookForm').addEventListener('submit', async (event) => {
       event.preventDefault();
       const name = document.getElementById('name').value;
@@ -65,13 +62,12 @@
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
         document.getElementById('guestbookForm').reset();
-        loadGuestbook(); // 데이터 갱신
+        loadGuestbook();
       } catch (error) {
         console.error("Error adding to guestbook:", error);
       }
     });
 
-    // 페이지 로드 시 데이터 불러오기
     loadGuestbook();
   </script>
 </body>
