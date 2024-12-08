@@ -1,7 +1,20 @@
 const fetch = require('node-fetch');
 
 exports.handler = async (event) => {
-  const apiUrl = 'https://script.google.com/macros/s/AKfycbzGFLLiU8GO84F4tcM2HohRkELdEDNtTuyq7kPH4YhsTgUZ3mS4x9VQBoPNfKv_cai7/exec'; // Google Apps Script 배포 URL
+  // OPTIONS 요청 처리
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      },
+      body: '',
+    };
+  }
+
+  const apiUrl = 'https://script.google.com/macros/s/AKfycbz8Ici8hGEAayABnrjw_dAZhGphUkLlNTY2JAEO90SIa57jzxMK4MrA95q5NmLLKngk/exec'; // Google Apps Script 배포 URL
 
   const options = {
     method: event.httpMethod,
