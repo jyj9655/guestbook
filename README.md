@@ -1,6 +1,8 @@
-# Google Sheets와 Google Apps Script를 이용한 간단한 방명록
+# Google Sheets로 만드는 방명록
 
-이 프로젝트는 Google Sheets와 Google Apps Script를 활용하여 간단한 방명록을 구현한 것입니다. 사용자는 이름과 메시지를 입력하면 Google Sheets에 데이터가 저장되고, 저장된 데이터를 웹 페이지에서 확인할 수 있습니다. 프로젝트의 주요 목표는 간단한 데이터 관리와 클라이언트-서버 간의 통신을 학습하는 것입니다.
+이 프로젝트는 Google Sheets와 Google Apps Script를 활용하여 간단한 방명록을 구현한 것입니다.
+사용자는 이름과 메시지를 입력하면 Google Sheets에 데이터가 저장되고, 저장된 데이터를 웹 페이지에서 확인할 수 있습니다.
+간단한 서버리스 환경을 구성해보고자 이 프로젝트를 시작했습니다.
 
 ---
 
@@ -230,4 +232,4 @@ npm install node-fetch
 
 이 프로젝트는 Google Apps Script와 Netlify Functions를 활용하여 간단한 방명록을 구현하는 예제입니다. CORS 문제를 해결하기 위해 Netlify Functions를 도입하였으며, 브라우저와 서버 간 통신이 원활하게 작동하도록 구성되었습니다.
 
-Netlify와 Google Apps Script의 강력한 기능을 활용하여 다양한 프로젝트에 확장 가능하며, 서버리스 환경에서 효율적인 데이터 관리를 제공합니다. 😊
+Netlify와 Google Apps Script의 강력한 기능을 활용하여 다양한 프로젝트에 확장 가능하며, 서버리스 환경에서 효율적인 데이터 관리를 제공합니다.
