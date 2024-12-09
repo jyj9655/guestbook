@@ -50,22 +50,52 @@ Google Sheets와 연결된 Apps Script에서 아래 코드를 추가합니다:
 ```javascript
 function doPost(e) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('방명록');
-  const data = JSON.parse(e.postData.contents);
-  sheet.appendRow([data.name, data.message, new Date()]);
-  return ContentService.createTextOutput(JSON.stringify({ status: 'success' }))
-    .setMimeType(ContentService.MimeType.JSON);
+  if (!sheet) {
+    return ContentService.createTextOutput(
+      JSON.stringify({ error: "Sheet '방명록' not found" })
+    ).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  try {
+    const data = JSON.parse(e.postData.contents);
+    sheet.appendRow([data.name, data.message, new Date()]);
+
+    return ContentService.createTextOutput(
+      JSON.stringify({ status: 'success' })
+    ).setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    return ContentService.createTextOutput(
+      JSON.stringify({ error: error.message })
+    ).setMimeType(ContentService.MimeType.JSON);
+  }
 }
 
 function doGet(e) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('방명록');
+  if (!sheet) {
+    return ContentService.createTextOutput(
+      JSON.stringify({ error: "Sheet '방명록' not found" })
+    ).setMimeType(ContentService.MimeType.JSON);
+  }
+
   const rows = sheet.getRange(2, 1, sheet.getLastRow() - 1, sheet.getLastColumn()).getValues();
   const result = rows.map(row => ({
     name: row[0],
     message: row[1],
     timestamp: row[2],
   }));
+
   return ContentService.createTextOutput(JSON.stringify(result))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+// OPTIONS 요청 처리
+function doOptions(e) {
+  return ContentService.createTextOutput("")
+    .setMimeType(ContentService.MimeType.TEXT)
+    .setHeader("Access-Control-Allow-Origin", "*")
+    .setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+    .setHeader("Access-Control-Allow-Headers", "Content-Type");
 }
 ```
 
