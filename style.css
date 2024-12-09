@@ -12,51 +12,83 @@
     font-style: normal;
 }
 
-/* 전체 배경 설정 */
-body {
-    font-family: 'Pretendard-Regular', Arial, sans-serif;
+/* 전체 기본 글씨체 설정 */
+* {
+    font-family: 'GowunDodum-Regular', Arial, sans-serif; /* 기본 글씨체 */
     margin: 0;
     padding: 0;
-    background-color: #2e2e2e;
-    /* 양옆 검은색 배경 */
+    box-sizing: border-box;
+}
+
+/* 전체 배경 설정 */
+body {
+    background-color: #333333; /* 양옆 검은색 배경 */
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    /* 화면 전체 높이 */
+    min-height: 100vh; /* 화면 전체 높이 */
+}
+
+/* 별 컨테이너 */
+#background-stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+/* 별 모양 */
+.star {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-image: radial-gradient(circle, white 60%, rgba(255, 255, 255, 0) 70%);
+    opacity: 0.8;
+    animation: twinkle 4s infinite ease-in-out;
+    transform-origin: center;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+/* 반짝이는 효과 */
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
 }
 
 /* 중앙 베이지색 영역 */
 #center-background {
-    background-color: #fef5e7;
-    /* 밝은 베이지 배경 */
+    background-color: #fef5e7; /* 밝은 베이지 배경 */
     width: 100%;
-    max-width: 600px;
-    /* 스마트폰 크기 고정 */
-    min-height: 100vh;
-    /* 화면 전체 높이 */
+    max-width: 600px; /* 스마트폰 크기 고정 */
+    min-height: 100vh; /* 화면 전체 높이 */
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 0;
-    /* 위아래 여백 */
+    padding: 20px 0; /* 위아래 여백 */
     box-sizing: border-box;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.4), 
+                0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 /* 방명록 컨테이너 */
 #guestbook-container {
     width: 100%;
-    /* 부모 컨테이너를 100%로 설정 */
-    max-width: 600px;
-    /* 중앙 영역과 동일한 최대 너비 */
+    max-width: 600px; /* 중앙 영역과 동일한 최대 너비 */
     margin: 0 auto;
     text-align: center;
-    box-sizing: border-box;
 }
 
 /* 제목 스타일 */
 h1 {
-    font-family: 'GowunDodum-Regular', Arial, sans-serif;
     font-size: 1.8rem;
     color: #af6d51;
     margin-bottom: 20px;
@@ -67,15 +99,12 @@ h1 {
 /* 방명록 목록 */
 #guestbook {
     width: 100%;
-    background-color: #f3eae0;
-    /* 목록 컨테이너 배경 */
+    background-color: #f3eae0; /* 목록 컨테이너 배경 */
     padding: 20px;
     margin: 0;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    /* 항목 간 간격 */
+    gap: 15px; /* 항목 간 간격 */
 }
 
 /* 방명록 항목 */
@@ -84,14 +113,12 @@ h1 {
     flex-direction: column;
     align-items: flex-start;
     padding: 15px;
-    background-color: #fcf8f5;
-    /* 항목 배경 */
+    background-color: #fcf8f5; /* 항목 배경 */
     border: 1px solid #e5e0dc;
 }
 
 /* 방명록 제목 */
 .entry strong {
-    font-family: 'GowunDodum-Regular', Arial, sans-serif;
     font-size: 1.2rem;
     color: #4d4d4d;
     margin-bottom: 5px;
@@ -115,26 +142,24 @@ h1 {
 /* 페이징과 작성하기 버튼 섹션 */
 #pagination-and-button {
     display: flex;
-    justify-content: space-between;
-    /* 좌우 정렬 */
+    justify-content: space-between; /* 좌우 끝으로 배치 */
     align-items: center;
     margin-top: 20px;
-    padding: 0 20px;
-    /* 좌우 여백 */
-    max-width: 400px;
-    /* 중앙 정렬 제한 */
+    padding: 0 40px; /* 좌우 여백 (PC 화면 기준) */
+    max-width: 600px; /* 최대 너비 */
     margin-left: auto;
-    /* 가운데 정렬 */
     margin-right: auto;
-    /* 가운데 정렬 */
+    box-sizing: border-box;
 }
 
 /* 페이징 */
 #pagination {
     display: flex;
     gap: 10px;
+    margin-left: 0; /* 왼쪽 정렬 */
 }
 
+/* 페이징 항목 */
 .page-number {
     font-size: 1rem;
     color: #8c8c8c;
@@ -156,11 +181,9 @@ h1 {
     font-size: 1rem;
     padding: 10px 20px;
     border-radius: 8px;
-    /* 버튼에 라운드 추가 */
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-left: 20px;
-    /* 버튼과 페이징 간격 추가 */
+    margin-right: 0; /* 오른쪽 정렬 */
 }
 
 #openPopup:hover {
@@ -174,8 +197,7 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    /* 어두운 배경 */
+    background-color: rgba(0, 0, 0, 0.6); /* 어두운 배경 */
     display: none;
     justify-content: center;
     align-items: center;
@@ -184,28 +206,20 @@ h1 {
 
 /* 팝업 내용 */
 .popup-content {
-    background-color: #fcf8f5;
-    /* 팝업 내부 배경 */
+    background-color: #fcf8f5; /* 팝업 내부 배경 */
     width: calc(100% - 40px);
-    /* 양쪽 패딩 포함한 너비 계산 */
-    max-width: 500px;
-    /* 팝업 너비 고정 */
+    max-width: 500px; /* 팝업 너비 고정 */
     padding: 20px;
     border: 1px solid #e5e0dc;
-    /* 카드 느낌의 테두리 */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    /* 그림자 강조 */
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    /* 요소 간 간격 */
-    box-sizing: border-box;
 }
 
 /* 팝업 제목 */
 .popup-content h2 {
-    font-family: 'GowunDodum-Regular', Arial, sans-serif;
     font-size: 1.8rem;
     color: #af6d51;
     text-align: center;
@@ -217,7 +231,6 @@ form {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    /* 입력 필드 간격 */
 }
 
 form input,
@@ -229,8 +242,6 @@ form textarea {
     background-color: #fff;
     color: #333;
     border-radius: 5px;
-    /* 살짝 둥근 모서리 */
-    box-sizing: border-box;
 }
 
 form textarea {
@@ -247,7 +258,6 @@ form button {
     color: #fff;
     border: none;
     border-radius: 8px;
-    /* 버튼 라운드 */
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -275,6 +285,10 @@ form button:hover {
 
 /* 반응형 설정 */
 @media screen and (max-width: 768px) {
+    #pagination-and-button {
+        padding: 0 20px; /* 모바일에서 좌우 여백 줄이기 */
+    }
+
     .popup-content {
         width: calc(100% - 40px);
         max-width: 95%;

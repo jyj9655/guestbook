@@ -1,3 +1,44 @@
+// 별 생성
+const starContainer = document.createElement("div");
+starContainer.id = "background-stars";
+document.body.appendChild(starContainer);
+
+const MAX_STARS = 80; // 별 갯수 설정
+const EXCLUDED_AREA = { top: 0, left: 25, width: 50, height: 100 }; // 중앙 영역 비율(%)
+
+for (let i = 0; i < MAX_STARS; i++) {
+    const star = document.createElement("div");
+    star.className = "star";
+
+    let top, left;
+
+    // 별이 중앙 영역을 벗어날 때까지 반복
+    do {
+        top = Math.random() * 100; // 0% ~ 100%
+        left = Math.random() * 100; // 0% ~ 100%
+    } while (
+        left > EXCLUDED_AREA.left &&
+        left < EXCLUDED_AREA.left + EXCLUDED_AREA.width &&
+        top > EXCLUDED_AREA.top &&
+        top < EXCLUDED_AREA.top + EXCLUDED_AREA.height
+    );
+
+    // 랜덤 크기
+    const size = Math.random() * 2 + 1; // 1px ~ 3px
+    star.style.width = `${size}px`;
+    star.style.height = `${size}px`;
+
+    // 별 위치
+    star.style.top = `${top}%`;
+    star.style.left = `${left}%`;
+
+    // 랜덤 반짝임 딜레이
+    star.style.animationDelay = `${Math.random() * 4}s`;
+
+    // 별 추가
+    starContainer.appendChild(star);
+}
+
 // 팝업 열기 및 닫기
 const openPopup = document.getElementById('openPopup');
 const closePopup = document.getElementById('closePopup');
