@@ -1,217 +1,263 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GowunDodum-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* 전체 배경 설정 */
 body {
     font-family: 'Pretendard-Regular', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #2e2e2e; /* 양옆 검은색 배경 */
+    background-color: #2e2e2e;
+    /* 양옆 검은색 배경 */
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* 화면 전체 높이 */
-  }
-  
-  /* 중앙 베이지색 영역 */
-  #center-background {
-    background-color: #fef5e7; /* 밝은 베이지 배경 */
+    min-height: 100vh;
+    /* 화면 전체 높이 */
+}
+
+/* 중앙 베이지색 영역 */
+#center-background {
+    background-color: #fef5e7;
+    /* 밝은 베이지 배경 */
     width: 100%;
-    max-width: 600px; /* 스마트폰 크기 고정 */
-    min-height: 100vh; /* 화면 전체 높이 */
+    max-width: 600px;
+    /* 스마트폰 크기 고정 */
+    min-height: 100vh;
+    /* 화면 전체 높이 */
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 0; /* 위아래 여백 */
+    padding: 20px 0;
+    /* 위아래 여백 */
     box-sizing: border-box;
-  }
-  
-  /* 방명록 컨테이너 */
-  #guestbook-container {
-    width: 90%;
-    max-width: 400px;
-    margin: 0 auto; /* 가운데 정렬 */
+}
+
+/* 방명록 컨테이너 */
+#guestbook-container {
+    width: 100%;
+    /* 부모 컨테이너를 100%로 설정 */
+    max-width: 600px;
+    /* 중앙 영역과 동일한 최대 너비 */
+    margin: 0 auto;
     text-align: center;
-  }
-  
-  /* 제목 스타일 */
-  h1 {
+    box-sizing: border-box;
+}
+
+/* 제목 스타일 */
+h1 {
     font-family: 'GowunDodum-Regular', Arial, sans-serif;
     font-size: 1.8rem;
     color: #af6d51;
     margin-bottom: 20px;
     text-align: center;
-    width: 100%; /* 부모 컨테이너 너비에 맞춤 */
-  }
-  
-  /* 방명록 목록 */
-  #guestbook {
-    width: 100%; /* 부모 컨테이너 너비에 맞춤 */
-    background-color: #f3eae0; /* 목록 컨테이너 배경 */
-    padding: 20px; /* 내부 여백 */
-    margin: 0; /* 바깥 여백 제거 */
-    box-sizing: border-box; /* 패딩 포함 */
+    width: 100%;
+}
+
+/* 방명록 목록 */
+#guestbook {
+    width: 100%;
+    background-color: #f3eae0;
+    /* 목록 컨테이너 배경 */
+    padding: 20px;
+    margin: 0;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: 15px; /* 항목 간 간격 */
-  }
-  
-  /* 방명록 항목 */
-  .entry {
+    gap: 15px;
+    /* 항목 간 간격 */
+}
+
+/* 방명록 항목 */
+.entry {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 15px;
-    background-color: #fcf8f5; /* 항목 배경 */
-    border: 1px solid #e5e0dc; /* 테두리 */
-    box-shadow: none;
-    margin-bottom: 15px;
-  }
-  
-  /* 방명록 제목 */
-  .entry strong {
+    background-color: #fcf8f5;
+    /* 항목 배경 */
+    border: 1px solid #e5e0dc;
+}
+
+/* 방명록 제목 */
+.entry strong {
     font-family: 'GowunDodum-Regular', Arial, sans-serif;
     font-size: 1.2rem;
     color: #4d4d4d;
     margin-bottom: 5px;
-  }
-  
-  /* 방명록 내용 */
-  .entry div {
+}
+
+/* 방명록 내용 */
+.entry div {
     font-size: 1rem;
     color: #333;
     line-height: 1.5;
-  }
-  
-  /* 날짜 */
-  .entry small {
+}
+
+/* 날짜 */
+.entry small {
     font-size: 0.9rem;
     color: #8c8c8c;
     margin-top: 10px;
     text-align: left;
-  }
-  
-  /* 페이징과 작성하기 버튼 섹션 */
-  #pagination-and-button {
+}
+
+/* 페이징과 작성하기 버튼 섹션 */
+#pagination-and-button {
     display: flex;
     justify-content: space-between;
+    /* 좌우 정렬 */
     align-items: center;
     margin-top: 20px;
-  }
-  
-  /* 페이징 */
-  #pagination {
+    padding: 0 20px;
+    /* 좌우 여백 */
+    max-width: 400px;
+    /* 중앙 정렬 제한 */
+    margin-left: auto;
+    /* 가운데 정렬 */
+    margin-right: auto;
+    /* 가운데 정렬 */
+}
+
+/* 페이징 */
+#pagination {
     display: flex;
     gap: 10px;
-  }
-  
-  .page-number {
+}
+
+.page-number {
     font-size: 1rem;
     color: #8c8c8c;
     cursor: pointer;
     transition: color 0.3s;
-  }
-  
-  .page-number:hover,
-  .page-number.active {
+}
+
+.page-number:hover,
+.page-number.active {
     color: #b8896e;
     font-weight: bold;
-  }
-  
-  /* 작성하기 버튼 */
-  #openPopup {
+}
+
+/* 작성하기 버튼 */
+#openPopup {
     background-color: #b8896e;
     color: #fff;
     border: none;
     font-size: 1rem;
     padding: 10px 20px;
-    border-radius: 8px; /* 버튼에 라운드 추가 */
+    border-radius: 8px;
+    /* 버튼에 라운드 추가 */
     cursor: pointer;
     transition: background-color 0.3s;
-  }
-  
-  #openPopup:hover {
+    margin-left: 20px;
+    /* 버튼과 페이징 간격 추가 */
+}
+
+#openPopup:hover {
     background-color: #9c715d;
-  }
-  
-  /* 팝업 배경 */
-  #popup {
+}
+
+/* 팝업 배경 */
+#popup {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* 어두운 배경 */
+    background-color: rgba(0, 0, 0, 0.6);
+    /* 어두운 배경 */
     display: none;
     justify-content: center;
     align-items: center;
     z-index: 1000;
-  }
-  
-  /* 팝업 내용 */
-  .popup-content {
-    background-color: #fcf8f5; /* 팝업 내부 배경 */
-    width: calc(100% - 40px); /* 양쪽 패딩 포함한 너비 계산 */
-    max-width: 500px; /* 팝업 너비 고정 */
+}
+
+/* 팝업 내용 */
+.popup-content {
+    background-color: #fcf8f5;
+    /* 팝업 내부 배경 */
+    width: calc(100% - 40px);
+    /* 양쪽 패딩 포함한 너비 계산 */
+    max-width: 500px;
+    /* 팝업 너비 고정 */
     padding: 20px;
-    border: 1px solid #e5e0dc; /* 카드 느낌의 테두리 */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 그림자 강조 */
+    border: 1px solid #e5e0dc;
+    /* 카드 느낌의 테두리 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* 그림자 강조 */
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 20px; /* 요소 간 간격 */
+    gap: 20px;
+    /* 요소 간 간격 */
     box-sizing: border-box;
-  }
-  
-  /* 팝업 제목 */
-  .popup-content h2 {
+}
+
+/* 팝업 제목 */
+.popup-content h2 {
     font-family: 'GowunDodum-Regular', Arial, sans-serif;
     font-size: 1.8rem;
     color: #af6d51;
     text-align: center;
     margin-bottom: 10px;
-  }
-  
-  /* 폼 스타일 */
-  form {
+}
+
+/* 폼 스타일 */
+form {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* 입력 필드 간격 */
-  }
-  
-  form input,
-  form textarea {
+    gap: 15px;
+    /* 입력 필드 간격 */
+}
+
+form input,
+form textarea {
     width: 100%;
     padding: 12px;
     font-size: 1rem;
     border: 1px solid #ddd;
     background-color: #fff;
     color: #333;
-    border-radius: 5px; /* 살짝 둥근 모서리 */
-    box-sizing: border-box; /* 패딩 포함 */
-  }
-  
-  form textarea {
-    height: 100px; /* 텍스트 영역 높이 */
-    resize: none; /* 크기 조절 비활성화 */
-  }
-  
-  /* 작성 버튼 */
-  form button {
+    border-radius: 5px;
+    /* 살짝 둥근 모서리 */
+    box-sizing: border-box;
+}
+
+form textarea {
+    height: 100px;
+    resize: none;
+}
+
+/* 작성 버튼 */
+form button {
     padding: 12px;
     font-size: 1rem;
     font-weight: bold;
     background-color: #b8896e;
     color: #fff;
     border: none;
-    border-radius: 8px; /* 버튼 라운드 */
+    border-radius: 8px;
+    /* 버튼 라운드 */
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
-  
-  form button:hover {
+}
+
+form button:hover {
     background-color: #9c715d;
-  }
-  
-  /* 닫기 버튼 */
-  .close-btn {
+}
+
+/* 닫기 버튼 */
+.close-btn {
     position: absolute;
     top: 15px;
     right: 15px;
@@ -221,17 +267,16 @@ body {
     color: #333;
     cursor: pointer;
     transition: color 0.2s ease;
-  }
-  
-  .close-btn:hover {
+}
+
+.close-btn:hover {
     color: #b8896e;
-  }
-  
-  /* 반응형 설정 */
-  @media screen and (max-width: 768px) {
+}
+
+/* 반응형 설정 */
+@media screen and (max-width: 768px) {
     .popup-content {
-      width: calc(100% - 40px); /* 패딩 포함한 모바일 너비 */
-      max-width: 95%; /* 최대 너비 */
+        width: calc(100% - 40px);
+        max-width: 95%;
     }
-  }
-  
+}
