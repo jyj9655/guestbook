@@ -80,9 +80,10 @@ function doGet(e) {
 
 ### Netlify Functions란?
 브라우저와 Google Apps Script 간의 통신을 중계하여 CORS 문제를 해결합니다.
+이 프로젝트에서는 Netlify Functions를 사용해 브라우저와 Google Apps Script 간의 요청을 처리하고, 서버리스 방식으로 간단한 백엔드 기능을 구현했습니다.
 
 ### proxy.js 파일
-`netlify/functions/` 디렉토리에 `proxy.js` 파일을 생성하고 아래 코드를 추가합니다:
+`netlify/functions/` 디렉토리를 생성한 후 `proxy.js` 파일을 생성하고 아래 코드를 추가합니다:
 
 ```javascript
 const fetch = require('node-fetch');
@@ -127,8 +128,9 @@ exports.handler = async (event) => {
 
 ---
 
-### Netlify 설정
-`netlify.toml` 파일을 프로젝트 루트에 생성하고 아래 내용을 추가합니다:
+### netlify.toml 파일 생성
+Netlify Functions 설정을 위해 `netlify.toml` 파일이 필요합니다.  
+프로젝트 루트에 생성하고 아래 내용을 추가합니다:
 
 ```toml
 [functions]
@@ -137,12 +139,79 @@ directory = "netlify/functions"
 
 ---
 
-### 의존성 설치
-프로젝트 루트에서 `node-fetch`를 설치:
+### Node.js 버전 및 의존성 설치
 
+1. Node.js 버전 확인  
+  Node.js의 최신 버전(18 이상)을 사용하면 fetch가 기본적으로 내장되어 있어 node-fetch 설치가 필요하지 않습니다.  
+  현재 사용 중인 Node.js 버전을 확인하려면 다음 명령어를 실행하세요:
+  ```bash
+     node -v
+  ```
+   - Node.js 18 이상: node-fetch 설치 불필요.  
+   - Node.js 18 미만: node-fetch 설치 필요.
+
+2. node-fetch 설치 (필요한 경우)  
+  Node.js 버전이 18 미만인 경우, 프로젝트 루트에서 node-fetch를 설치하세요.  
+  ```bash
+  npm install node-fetch
+  ```
+
+---
+
+### Netlify CLI와 설정 절차
+Netlify Functions를 설정하고 실행하기 위해 다음 명령어를 순서대로 실행합니다:
+
+1. 프로젝트 초기화  
+  프로젝트 폴더를 초기화하고 package.json 파일을 생성합니다.
+  ```bash
+  npm init -y
+  ```
+2. Netlify CLI 설치  
+  Netlify CLI를 전역으로 설치합니다.
+  ```bash
+  npm install -g netlify-cli
+  ```
+3. Netlify 로그인 및 프로젝트 초기화  
+  Netlify 계정에 로그인하고 프로젝트를 설정합니다.
+  ```bash
+  netlify login
+  netlify init
+  ```
+  - 기존 사이트와 연결하거나 새 사이트를 만듭니다.
+
+5. Netlify Functions 디렉토리 설정  
+  netlify.toml 파일을 생성하고 위 내용을 추가합니다.
+
+6. 로컬 서버 실행  
+  개발 중 Functions를 테스트하기 위해 Netlify의 로컬 개발 서버를 실행합니다.
+  ```bash
+  netlify dev
+  ```
+7. 배포  
+  프로젝트를 Netlify에 배포합니다.
+  ```bash
+  netlify deploy
+  ```
+  - 바로 프로덕션에 배포하려면 --prod 옵션을 사용합니다.
+  ```bash
+  netlify deploy --prod
+  ```
+
+---
+
+### 요약 명령어
+
+Netlify Functions 설정을 위한 명령어를 요약하면 다음과 같습니다:
 ```bash
-npm install node-fetch
+npm init -y  
+npm install -g netlify-cli  
+netlify login  
+netlify init  
+npm install node-fetch (Node.js 18 미만일 경우)  
+netlify dev  
+netlify deploy --prod  
 ```
+이 단계를 완료하면 Netlify Functions를 활용한 서버리스 백엔드 구성이 완료됩니다.
 
 ---
 
