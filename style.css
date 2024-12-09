@@ -29,41 +29,6 @@ body {
     min-height: 100vh; /* 화면 전체 높이 */
 }
 
-/* 별 컨테이너 */
-#background-stars {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-}
-
-/* 별 모양 */
-.star {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background-image: radial-gradient(circle, white 60%, rgba(255, 255, 255, 0) 70%);
-    opacity: 0.8;
-    animation: twinkle 4s infinite ease-in-out;
-    transform-origin: center;
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
-}
-
-/* 반짝이는 효과 */
-@keyframes twinkle {
-    0%, 100% {
-        opacity: 0.3;
-        transform: scale(0.8);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1.2);
-    }
-}
-
 /* 중앙 베이지색 영역 */
 #center-background {
     background-color: #fef5e7; /* 밝은 베이지 배경 */
@@ -292,5 +257,13 @@ form button:hover {
     .popup-content {
         width: calc(100% - 40px);
         max-width: 95%;
+    }
+
+    #background-stars {
+        display: none; /* 별 배경 비활성화 */
+    }
+
+    #center-background {
+        box-shadow: none; /* 네온 효과 제거 */
     }
 }
