@@ -4,71 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>방명록</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    h1 { text-align: center; }
-    form { margin-bottom: 20px; }
-    #guestbook { margin-top: 20px; }
-    .entry { margin-bottom: 10px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
-    .entry strong { display: block; font-size: 1.1em; }
-    .entry small { color: gray; font-size: 0.9em; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>방명록</h1>
-  <form id="guestbookForm">
-    <input type="text" id="name" placeholder="이름" required>
-    <textarea id="message" placeholder="메시지를 작성해주세요" required></textarea>
-    <button type="submit">작성</button>
-  </form>
-  <div id="guestbook"></div>
+  <!-- 스마트폰 크기만큼의 베이지색 중앙 영역 -->
+  <div id="center-background">
+    <div id="guestbook-container">
+      <h1>방명록</h1>
+      <!-- 방명록 목록 -->
+      <div id="guestbook">
+        <!-- 방명록 항목이 여기에 표시됩니다 -->
+      </div>
+      <!-- 페이징 및 작성하기 버튼 -->
+      <div id="pagination-and-button">
+        <div id="pagination">
+          <span class="page-number active">1</span>
+          <span class="page-number">2</span>
+          <span class="page-number">3</span>
+          <span class="page-number">4</span>
+        </div>
+        <button id="openPopup">작성하기</button>
+      </div>
+    </div>
+  </div>
 
-  <script>
-    const apiUrl = '/.netlify/functions/proxy';
+  <!-- 팝업 (기본적으로 숨김 상태) -->
+  <div id="popup" class="hidden">
+    <div class="popup-content">
+      <button id="closePopup" class="close-btn">&times;</button>
+      <h2>방명록</h2>
+      <form id="popupForm">
+        <label for="name">이름</label>
+        <input type="text" id="name" placeholder="이름" required>
+        <label for="password">비밀번호</label>
+        <input type="password" id="password" placeholder="비밀번호" required>
+        <label for="message">메시지</label>
+        <textarea id="message" placeholder="100자 이내로 작성해주세요" maxlength="100" required></textarea>
+        <button type="submit">작성하기</button>
+      </form>
+    </div>
+  </div>
 
-    async function loadGuestbook() {
-      try {
-        const response = await fetch(apiUrl, { method: 'GET' });
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-
-        const guestbook = document.getElementById('guestbook');
-        guestbook.innerHTML = data.map(entry => `
-          <div class="entry">
-            <strong>${entry.name}</strong>
-            <div>${entry.message}</div>
-            <small>${new Date(entry.timestamp).toLocaleString()}</small>
-          </div>
-        `).join('');
-      } catch (error) {
-        console.error("Error loading guestbook:", error);
-      }
-    }
-
-    document.getElementById('guestbookForm').addEventListener('submit', async (event) => {
-      event.preventDefault();
-      const name = document.getElementById('name').value;
-      const message = document.getElementById('message').value;
-
-      try {
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, message }),
-        });
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        document.getElementById('guestbookForm').reset();
-        loadGuestbook();
-      } catch (error) {
-        console.error("Error adding to guestbook:", error);
-      }
-    });
-
-    loadGuestbook();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

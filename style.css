@@ -1,0 +1,217 @@
+/* 전체 배경 설정 */
+body {
+    font-family: 'Pretendard-Regular', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #2e2e2e; /* 양옆 검은색 배경 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* 화면 전체 높이 */
+  }
+  
+  /* 중앙 베이지색 영역 */
+  #center-background {
+    background-color: #fef5e7; /* 밝은 베이지 배경 */
+    width: 100%;
+    max-width: 600px; /* 스마트폰 크기 고정 */
+    min-height: 100vh; /* 화면 전체 높이 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0; /* 위아래 여백 */
+  }
+  
+  /* 방명록 컨테이너 */
+  #guestbook-container {
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  /* 제목 스타일 */
+  h1 {
+    font-family: 'GowunDodum-Regular', Arial, sans-serif;
+    font-size: 2rem;
+    color: #b8896e;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* 방명록 목록 */
+  #guestbook {
+    background-color: #ffffff; /* 방명록 카드 배경 */
+    border-radius: 8px;
+    border: 1px solid #e5e0dc;
+    padding: 20px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+  }
+  
+  .entry {
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #f0e9e2;
+    border-radius: 8px;
+    background-color: #ffffff; /* 카드 배경색 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* 페이징과 작성하기 버튼 섹션 */
+  #pagination-and-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  /* 페이징 */
+  #pagination {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .page-number {
+    font-size: 1rem;
+    color: #8c8c8c;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .page-number:hover,
+  .page-number.active {
+    color: #b8896e;
+    font-weight: bold;
+  }
+  
+  /* 작성하기 버튼 */
+  #openPopup {
+    background-color: #b8896e;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  #openPopup:hover {
+    background-color: #9c715d;
+  }
+  
+  /* 팝업 배경 */
+  #popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  /* 팝업 내용 */
+  .popup-content {
+    background-color: #fff;
+    width: 90%;
+    max-width: 400px; /* 팝업 너비 고정 */
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column; /* 세로 정렬 */
+    gap: 15px; /* 요소 간 간격 */
+  }
+  
+  /* 팝업 제목 */
+  .popup-content h2 {
+    font-family: 'GowunDodum-Regular', Arial, sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-align: left;
+    color: #333;
+  }
+  
+  /* 폼 스타일 */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* 입력 필드 간격 */
+  }
+  
+  form label {
+    font-size: 0.9rem;
+    color: #777;
+    text-align: left;
+  }
+  
+  form input,
+  form textarea {
+    width: 100%; /* 입력 필드 너비 고정 */
+    padding: 10px;
+    font-size: 0.95rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fefbf8;
+    box-sizing: border-box; /* 박스 크기 고정 */
+  }
+  
+  form textarea {
+    height: 80px; /* 텍스트 영역 높이 */
+    resize: none; /* 크기 조절 비활성화 */
+  }
+  
+  form button {
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #b8896e;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  form button:hover {
+    background-color: #9c715d;
+  }
+  
+  /* 닫기 버튼 */
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .close-btn:hover {
+    color: #b8896e;
+  }
+  
+  /* 반응형 설정 */
+  @media screen and (max-width: 768px) {
+    #center-background {
+      max-width: 100%; /* 모바일에서는 화면 전체 폭 사용 */
+      padding: 20px;
+    }
+  
+    .popup-content {
+      width: 95%; /* 모바일에서 팝업 너비 조정 */
+    }
+  }
+  
