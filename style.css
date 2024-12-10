@@ -74,34 +74,45 @@ h1 {
 
 /* 방명록 항목 */
 .entry {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    position: relative; /* 내부 요소 절대 위치 지정 가능 */
     padding: 15px;
-    background-color: #fcf8f5; /* 항목 배경 */
+    background-color: #fcf8f5;
     border: 1px solid #e5e0dc;
+    text-align: left; /* 모든 텍스트를 왼쪽 정렬 */
 }
 
 /* 방명록 제목 */
 .entry strong {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     color: #4d4d4d;
-    margin-bottom: 5px;
 }
 
 /* 방명록 내용 */
 .entry div {
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: #333;
-    line-height: 1.5;
 }
 
 /* 날짜 */
 .entry small {
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     color: #8c8c8c;
-    margin-top: 10px;
-    text-align: left;
+}
+
+/* 삭제 버튼 (x) 스타일 */
+.delete-icon {
+    position: absolute; /* 박스 오른쪽 위 */
+    top: 5px;
+    right: 15px;
+    color: #b8896e;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+  
+.delete-icon:hover {
+    color: #9c715d;
 }
 
 /* 페이징과 작성하기 버튼 섹션 */
@@ -246,6 +257,34 @@ form button:hover {
 
 .close-btn:hover {
     color: #b8896e;
+}
+
+/* 팝업 배경 */
+#deletePopup {
+    position: fixed; /* 화면 고정 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* 어두운 배경 */
+    display: none;
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+    z-index: 1000;
+}
+
+/* 팝업 내용 */
+.popup-content {
+    background-color: #fcf8f5; /* 팝업 내부 배경 */
+    width: calc(100% - 40px);
+    max-width: 500px; /* 팝업 너비 고정 */
+    padding: 20px;
+    border: 1px solid #e5e0dc;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 /* 반응형 설정 */

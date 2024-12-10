@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- 스마트폰 크기만큼의 베이지색 중앙 영역 -->
   <div id="center-background">
     <div id="guestbook-container">
       <h1>방명록</h1>
@@ -17,22 +16,17 @@
       </div>
       <!-- 페이징 및 작성하기 버튼 -->
       <div id="pagination-and-button">
-        <div id="pagination">
-          <span class="page-number active">1</span>
-          <span class="page-number">2</span>
-          <span class="page-number">3</span>
-          <span class="page-number">4</span>
-        </div>
+        <div id="pagination"></div>
         <button id="openPopup">작성하기</button>
       </div>
     </div>
   </div>
 
-  <!-- 팝업 (기본적으로 숨김 상태) -->
+  <!-- 작성 팝업 -->
   <div id="popup" class="hidden">
     <div class="popup-content">
       <button id="closePopup" class="close-btn">&times;</button>
-      <h2>방명록</h2>
+      <h2>방명록 작성</h2>
       <form id="popupForm">
         <label for="name">이름</label>
         <input type="text" id="name" placeholder="이름" required>
@@ -41,6 +35,18 @@
         <label for="message">메시지</label>
         <textarea id="message" placeholder="100자 이내로 작성해주세요" maxlength="100" required></textarea>
         <button type="submit">작성하기</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 삭제 비밀번호 팝업 -->
+  <div id="deletePopup" class="hidden">
+    <div class="popup-content">
+      <button id="closeDeletePopup" class="close-btn">&times;</button>
+      <form id="deleteForm">
+        <label for="deletePassword">비밀번호 확인</label>
+        <input type="password" id="deletePassword" placeholder="비밀번호" required>
+        <button type="submit">삭제하기</button>
       </form>
     </div>
   </div>
