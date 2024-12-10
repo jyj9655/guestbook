@@ -11,7 +11,7 @@ const closeDeletePopup = document.getElementById("closeDeletePopup");
 const deleteForm = document.getElementById("deleteForm");
 const deletePasswordField = document.getElementById("deletePassword");
 
-const apiUrl = "https://script.google.com/macros/s/AKfycbw3Zsa0ZMz6qPOh9YkaIQhlYO4hbkx2GKAzHKcPLgA1k7HeKOP0ES6_8ZXou2QVMhE0/exec";
+const apiUrl = "https://script.google.com/macros/s/AKfycbyl4lRTa3Xwi5aLLRBOkZNATZo01gUG2SQewN5EMzvyqt7lUOtnXXxxemc7yxtjx6CJ/exec";
 
 // 공통 함수: 요소 보이기
 function showElement(element) {
