@@ -15,16 +15,19 @@ exports.handler = async (event) => {
     };
   }
 
-  const body = event.body ? JSON.parse(event.body) : {};
-  const action = body.action || event.queryStringParameters?.action;
-
-  const options = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ...body, action }),
-  };
-
   try {
+    const options = {
+      method: event.httpMethod,
+      headers: { "Content-Type": "application/json" },
+    };
+
+    if (event.httpMethod === "POST") {
+      // POST 요청일 경우 본문 추가
+      const body = JSON.parse(event.body || "{}");
+      options.body = JSON.stringify(body);
+    }
+
+    // Google Apps Script에 요청 전달
     const response = await fetch(apiUrl, options);
     const responseBody = await response.text();
 
@@ -32,15 +35,15 @@ exports.handler = async (event) => {
       throw new Error(`Error from Google Apps Script: ${response.status} - ${responseBody}`);
     }
 
-    const data = JSON.parse(responseBody);
     return {
       statusCode: 200,
-      body: JSON.stringify(data),
+      body: responseBody,
       headers: {
         "Access-Control-Allow-Origin": "*",
       },
     };
   } catch (error) {
+    console.error("Error in proxy:", error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message }),
