@@ -1,9 +1,8 @@
 const fetch = require('node-fetch');
 
 exports.handler = async (event) => {
-  const apiUrl =
-    'https://script.google.com/macros/s/AKfycbzxgCyAMdYaIBb_pgHIco4UlGjPmGGUmOFfCNog8rUfOSS8P49Q-hFXADhg_Im2Y3BB/exec'; // Google Apps Script URL
-
+  const apiUrl = "https://script.google.com/macros/s/AKfycbx-OE_ug6hrRUZl3Xn3la55lXjFNUK9KOR8oSWiwPndsrX9JtMt8LapbpB4eq0aJskm/exec";
+  
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,

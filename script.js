@@ -11,7 +11,7 @@ const closeDeletePopup = document.getElementById("closeDeletePopup");
 const deleteForm = document.getElementById("deleteForm");
 const deletePasswordField = document.getElementById("deletePassword");
 
-const apiUrl = "https://script.google.com/macros/s/AKfycbx-OE_ug6hrRUZl3Xn3la55lXjFNUK9KOR8oSWiwPndsrX9JtMt8LapbpB4eq0aJskm/exec";
+const apiUrl = "/.netlify/functions/proxy";
 
 // 공통 함수: 요소 보이기
 function showElement(element) {
