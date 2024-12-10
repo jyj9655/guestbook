@@ -1,6 +1,6 @@
 const itemsPerPage = 5;
 let currentPage = 1;
-let allGuestbookData = []; // 방명록 데이터
+let allGuestbookData = [];
 
 const openPopup = document.getElementById("openPopup");
 const closePopup = document.getElementById("closePopup");
@@ -13,47 +13,39 @@ const deletePasswordField = document.getElementById("deletePassword");
 
 const apiUrl = "/.netlify/functions/proxy";
 
-// 공통 함수: 요소 보이기
 function showElement(element) {
   element.classList.remove("hidden");
   element.style.display = "flex";
 }
 
-// 공통 함수: 요소 숨기기
 function hideElement(element) {
   element.classList.add("hidden");
   element.style.display = "none";
 }
 
-// 팝업 닫기 시 비밀번호 초기화
 function resetDeletePasswordField() {
-  deletePasswordField.value = ""; // 비밀번호 필드 초기화
+  deletePasswordField.value = "";
 }
 
-// 페이지 로드 후 초기화
 document.addEventListener("DOMContentLoaded", async () => {
   hideElement(deletePopup);
   hideElement(popup);
-  await loadGuestbook(); // 초기 데이터 로드
+  await loadGuestbook();
 });
 
-// 작성 팝업 열기
 openPopup.addEventListener("click", () => {
   showElement(popup);
 });
 
-// 작성 팝업 닫기
 closePopup.addEventListener("click", () => {
   hideElement(popup);
 });
 
-// 삭제 팝업 닫기
 closeDeletePopup.addEventListener("click", () => {
   hideElement(deletePopup);
   resetDeletePasswordField();
 });
 
-// 방명록 데이터 로드
 async function loadGuestbook() {
   try {
     const response = await fetch(apiUrl, { method: "GET" });
@@ -68,7 +60,6 @@ async function loadGuestbook() {
   }
 }
 
-// 페이지 렌더링
 function renderPage(page) {
   currentPage = page;
   const startIndex = (page - 1) * itemsPerPage;
@@ -97,7 +88,6 @@ function renderPage(page) {
   });
 }
 
-// 삭제 팝업 열기
 function openDeletePopup(id) {
   showElement(deletePopup);
   deleteForm.onsubmit = async (event) => {
@@ -105,12 +95,12 @@ function openDeletePopup(id) {
     const password = deletePasswordField.value;
 
     try {
-      const response = await fetch(`${apiUrl}?id=${id}`, {
-        method: "POST", // App Script에서 DELETE를 지원하지 않으므로 POST로 처리
+      const response = await fetch(apiUrl, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ action: "delete", password }),
+        body: JSON.stringify({ action: "delete", id, password }),
       });
 
       const result = await response.json();
@@ -119,7 +109,7 @@ function openDeletePopup(id) {
       }
 
       alert("삭제되었습니다.");
-      await loadGuestbook(); // 데이터 새로고침
+      await loadGuestbook();
     } catch (error) {
       alert(error.message || "비밀번호가 일치하지 않습니다.");
     } finally {
@@ -129,7 +119,6 @@ function openDeletePopup(id) {
   };
 }
 
-// 작성 팝업 제출
 popupForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const name = document.getElementById("name").value;
@@ -152,14 +141,13 @@ popupForm.addEventListener("submit", async (event) => {
     alert("작성되었습니다.");
     popupForm.reset();
     hideElement(popup);
-    await loadGuestbook(); // 데이터 새로고침
+    await loadGuestbook();
   } catch (error) {
     alert("방명록 작성에 실패했습니다. 다시 시도해주세요.");
     console.error("Error submitting guestbook entry:", error);
   }
 });
 
-// 페이징 설정
 function setupPagination() {
   const totalPages = Math.ceil(allGuestbookData.length / itemsPerPage);
   const pagination = document.getElementById("pagination");
@@ -177,7 +165,6 @@ function setupPagination() {
   }
 }
 
-// 현재 페이지 활성화
 function updatePagination(page) {
   const pageNumbers = document.querySelectorAll(".page-number");
   pageNumbers.forEach((btn, index) => {
