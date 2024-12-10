@@ -49,10 +49,24 @@ closeDeletePopup.addEventListener("click", () => {
 async function loadGuestbook() {
   try {
     const response = await fetch(apiUrl, { method: "GET" });
+
     if (!response.ok) {
       throw new Error("Failed to fetch guestbook data.");
     }
-    allGuestbookData = await response.json();
+
+    const responseData = await response.json();
+
+    console.log("Fetched response data:", responseData); // 디버깅: 응답 확인
+
+    // 응답 데이터 형식에 따라 처리
+    if (Array.isArray(responseData)) {
+      allGuestbookData = responseData;
+    } else if (responseData.data && Array.isArray(responseData.data)) {
+      allGuestbookData = responseData.data;
+    } else {
+      throw new TypeError("Unexpected data format: Data is not an array.");
+    }
+
     renderPage(1);
     setupPagination();
   } catch (error) {
